@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageIcon>DMNuGet.png</PackageIcon>
+    <PackageReadmeFile>README_UI.md</PackageReadmeFile>
+    <Version>10.0.0-Preview-1.0</Version>
+    <Title>UI Companion library for Marqdouj.DotNet.AzureMaps.Blazor NuGet package.</Title>
+    <PackageProjectUrl>https://github.com/marqdouj/dotnet.azuremaps.blazor</PackageProjectUrl>
+    <PackageTags>Blazor JSInterop Map Azure</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <Authors>Douglas Marquardt</Authors>
+    <Copyright>© Douglas Marquardt. All rights reserved.</Copyright>
+    <Description>UI Companion library for Marqdouj.DotNet.AzureMaps.Blazor NuGet Package</Description>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Marqdouj.DotNet.Web.Components.FluentUI" Version="10.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.2" />
+    <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.13.2" />
+    <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.13.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Marqdouj.DotNet.AzureMaps.Blazor\Marqdouj.DotNet.AzureMaps.Blazor.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\..\DMNuGet.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\..\..\README_UI.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

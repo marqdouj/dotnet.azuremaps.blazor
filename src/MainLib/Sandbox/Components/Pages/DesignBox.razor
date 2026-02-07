@@ -1,0 +1,159 @@
+﻿@page "/design"
+@using Marqdouj.DotNet.AzureMaps.Blazor.UI.Models.Layers
+@rendermode InteractiveServer
+@inject ILogger<DesignBox> Logger
+@inject IJSRuntime JSRuntime
+@inject IToastService ToastService
+@inject IDialogService DialogService
+@inject IAzureMapsUIXmlService XmlService
+@inject IMapDataService DataService
+
+<PageTitle>@pageName</PageTitle>
+
+<FluentLayout>
+    <FluentHeader>@pageName</FluentHeader>
+
+    <FluentStack Orientation="Orientation.Vertical">
+        <FluentToolbar>
+            <FluentButton Disabled="@disabled" IconStart="@(new Icons.Regular.Size20.ArrowReset())" Title="Reset Map" OnClick="@ResetMap" />
+            <FluentSpacer Width="8" />
+            <FluentButton Disabled="@disabledA" IconStart="@(new Icons.Regular.Size20.DesignIdeas())" Title="Design Test MapA" OnClick="@(() => DesignTest(mapA))" />
+            <FluentSpacer Width="8" />
+        </FluentToolbar>
+
+        <MapsContainer OnManagerReady="@ManagerReady"
+                       OnMapEventReady="@MapEventReady"
+                       OnMapEventError="@MapEventError"
+                       OnMapEvent="@MapEvent">
+            <FluentGrid>
+                <FluentGridItem>
+                    <FluentCard AreaRestricted="false" MinimalStyle="true" Width="@cardWidth">
+                        <FluentToolbar>
+                            <FluentButton Disabled="@disabledA" IconStart="@(new Icons.Regular.Size20.DesignIdeas())" Title="Design Test MapA" OnClick="@(() => DesignTest(mapA))" />
+                        </FluentToolbar>
+                        <div id="@mapA" style="@divStyle">
+                        </div>
+                    </FluentCard>
+                </FluentGridItem>
+
+                <FluentGridItem>
+                    <FluentCard AreaRestricted="false" MinimalStyle="true" Width="@cardWidth">
+                        @* <UIModelInputLayersDialog Content="@layerDefUI" /> *@
+@*                         <FluentTabs>
+                            <FluentTab Label="Layer">
+                                <UIModelInput Inputs="@layerDefUI?.ToUIInputList()" Height="350px" Width="350px" />
+                            </FluentTab>
+                            <FluentTab Label="DataSource">
+                                <UIModelInput Inputs="@layerDefUI?.DataSource.ToUIInputList()" Height="350px" Width="350px" />
+                            </FluentTab>
+                        </FluentTabs> *@
+                    </FluentCard>
+                </FluentGridItem>
+            </FluentGrid>
+        </MapsContainer>
+    </FluentStack>
+</FluentLayout>
+
+<FluentOverlay @bind-Visible="@overlay"
+               Transparent="false">
+    <FluentProgressRing />
+</FluentOverlay>
+
+@code {
+    private const string pageName = "Design Box";
+    private const string mapA = "mapA";
+    private string divStyle => "height:350px;width:100%;border:groove;border-width:1";
+    private string cardWidth => "400px";
+    private IAzMapsManager? mapsManager;
+    private IAzMapInterop? mapInteropA;
+    private bool mapAReady => mapInteropA is not null;
+    private bool overlay;
+    private bool disabled => overlay || mapsManager == null;
+    private bool disabledA => disabled || !mapAReady;
+    private MapLayerDef layerDef = MapLayerType.Bubble.GetDefaultLayerDef();
+    private BubbleLayerUIModel? layerDefUI;
+
+    protected override void OnInitialized()
+    {
+        layerDefUI = new(XmlService) { Source = (BubbleLayerDef) layerDef };
+    }
+
+    private async Task DesignTest(string mapId)
+    {
+        if (mapsManager == null) return;
+
+        if (mapsManager.TryGetInterop(mapId, out var mapInterop))
+        {
+            ToastService.ShowInfo(mapId);
+        }
+        else
+        {
+            ToastService.ShowError(mapId);
+        }
+    }
+
+    private async Task ManagerReady(MapsManagerEventArgs args)
+    {
+        try
+        {
+            if (args.Success)
+                this.mapsManager = args.Manager;
+            else
+            {
+                ToastService.ShowError(args.ExceptionMessage);
+                return;
+            }
+
+            await mapsManager!.CreateMap(mapA, options: MapHelpers.GetDefaultCreateMapOptions(), logLevel: LogLevel.Trace);
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, null);
+            ToastService.ShowError(ex.Message);
+        }
+    }
+
+    #region JsInterop
+
+    private async Task MapEvent(MapEventArgs args)
+    {
+        Console.WriteLine(args.ToJsonMin());
+    }
+
+    private async Task MapEventError(MapEventArgs args)
+    {
+        Console.WriteLine(args.ToJsonMin());
+        ToastService.ShowError(args.ToJsonMin());
+    }
+
+    private async Task MapEventReady(MapEventArgs args)
+    {
+        ToastService.ShowInfo(args.ToJsonMin());
+
+        switch (args.MapId)
+        {
+            case mapA:
+                mapInteropA = mapsManager!.GetInterop(mapA);
+                await mapInteropA.AddBasicMapLayer(DataService, layerDef);
+                break;
+            default:
+                break;
+        }
+    }
+
+    #endregion  
+
+    private async Task ResetMap()
+    {
+        try
+        {
+            if (mapAReady)
+                await mapInteropA!.Configurations.SetMapOptions(MapHelpers.GetDefaultSetMapOptions());
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, null);
+            ToastService.ShowError(ex.Message);
+        }
+    }
+}

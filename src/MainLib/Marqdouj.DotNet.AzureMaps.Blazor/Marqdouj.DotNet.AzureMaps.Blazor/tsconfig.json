@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "noEmitOnError": true,
+    "removeComments": true,
+    "sourceMap": false,
+    "outDir": "tsgen/azmaps",
+    "target": "esnext",
+    "moduleResolution": "bundler"
+  },
+  "include": [ "scripts/azmaps/**/*" ],
+  "compileOnSave": true,
+  "exclude": [
+    "node_modules",
+    "wwwroot",
+    "tsgen"
+  ]
+}

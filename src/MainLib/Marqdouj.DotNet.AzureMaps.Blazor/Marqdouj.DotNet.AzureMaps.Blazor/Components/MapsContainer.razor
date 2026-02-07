@@ -1,0 +1,112 @@
+﻿@using Marqdouj.DotNet.AzureMaps.Blazor.Models.Events
+@using Marqdouj.DotNet.AzureMaps.Blazor.Models.Geolocation
+@using Marqdouj.DotNet.AzureMaps.Blazor.Models.Interop
+@using Marqdouj.DotNet.AzureMaps.Blazor.Models.Settings
+@using Microsoft.Extensions.Logging
+@using Microsoft.Extensions.Options
+@using Microsoft.JSInterop
+@implements IAsyncDisposable
+@inject IJSRuntime JSRuntime
+@inject IOptions<MapConfiguration> Configuration
+@inject ILogger<MapsContainer> Logger
+
+@ChildContent
+
+@code {
+    private AzMapsManager<MapsContainer>? mapManager;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            MapConfiguration? config = null;
+
+            try
+            {
+                config = Configuration?.Value;
+                var auth = config?.Authentication;
+                if (config == null)
+                    throw new Exception($"Injection of {nameof(MapConfiguration)} returned null.");
+
+                if (auth == null)
+                    throw new Exception($"Injection of {nameof(MapConfiguration)}.{nameof(MapConfiguration.Options)} returned null.");
+
+                if (auth.IsNotValid())
+                    throw new Exception($"Invalid settings for the map: {auth.InValidMessage()}");
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "Map authentication failed.");
+                await OnManagerReady.InvokeAsync(new MapsManagerEventArgs(MapsManagerError.AuthenticationFailed, ex));
+                return;
+            }
+
+            try
+            {
+                mapManager = new AzMapsManager<MapsContainer>(JSRuntime, this, config, Logger)
+                    ?? throw new Exception($"Failed to create instance of {nameof(IAzMapsManager)}");
+
+                await OnManagerReady.InvokeAsync(new MapsManagerEventArgs(mapManager));
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "Map creation caused an exception.");
+                await OnManagerReady.InvokeAsync(new MapsManagerEventArgs(MapsManagerError.CreateInstanceFailed, ex));
+            }
+        }
+    }
+
+    [Parameter, EditorRequired]
+    public RenderFragment ChildContent { get; set; }
+
+    /// <summary>
+    /// Raised when the map manager has been successfully created.
+    /// </summary>
+    [Parameter, EditorRequired] public EventCallback<MapsManagerEventArgs> OnManagerReady { get; set; }
+
+    #region IAzureMapsComponent
+
+    /// <summary>
+    /// Event that is raised when an map error occurs.
+    /// </summary>
+    [Parameter] public EventCallback<MapEventArgs> OnMapEventError { get; set; }
+
+    /// <summary>
+    /// Event that is raised by a subscribed map event.
+    /// </summary>
+    [Parameter] public EventCallback<MapEventArgs> OnMapEvent { get; set; }
+
+    /// <summary>
+    /// Event that is raised by the azure map when it is ready for interation.
+    /// </summary>
+    [Parameter] public EventCallback<MapEventArgs> OnMapEventReady { get; set; }
+
+    [Parameter]
+    public EventCallback<GeolocationEventArgs> OnGeolocationWatch { get; set; }
+
+    [JSInvokable]
+    public async Task NotifyMapEventError(MapEventArgs e) => await OnMapEventError.InvokeAsync(e);
+
+    [JSInvokable]
+    public async Task NotifyMapEvent(MapEventArgs e) => await OnMapEvent.InvokeAsync(e);
+
+    [JSInvokable]
+    public async Task NotifyMapEventReady(MapEventArgs e) => await OnMapEventReady.InvokeAsync(e);
+
+    [JSInvokable]
+    public async Task NotifyGeolocationWatch(GeolocationEventArgs e) { await OnGeolocationWatch.InvokeAsync(e); }
+
+    #endregion
+
+    public async ValueTask DisposeAsync()
+    {
+        try
+        {
+            if (mapManager != null)
+                await mapManager.DisposeAsync();
+        }
+        catch (JSDisconnectedException)
+        {
+        }
+    }
+}

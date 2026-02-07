@@ -1,0 +1,23 @@
+﻿@implements IDialogContentComponent<InputDialogParameters>
+
+@if (Content.ResetCategory != null)
+{
+    <FluentToolbar>
+        <FluentButton IconStart="@(new Icons.Regular.Size20.ArrowReset())" Title="Reset to Defaults" OnClick="@ResetToDefaults" />
+    </FluentToolbar>
+}
+
+<UIModelInput Inputs="@Content.Inputs" Height="@Content.Height" Width="@Content.Width" Style="@Content.Style" />
+
+@code {
+    [Parameter, EditorRequired]
+	public InputDialogParameters Content { get; set; }
+
+    [CascadingParameter]
+    public FluentDialog? Dialog { get; set; }
+
+    private async Task ResetToDefaults()
+    {
+        Content.Model.ResetToDefaults(Content.ResetCategory!.Value);
+    }
+}

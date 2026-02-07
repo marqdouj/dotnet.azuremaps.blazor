@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="../Sandbox/Sandbox.csproj" />
+  <Project Path="Marqdouj.DotNet.AzureMaps.Blazor.UI/Marqdouj.DotNet.AzureMaps.Blazor.UI.csproj" Id="0ae4f7aa-e436-4a7f-bad1-cbc820771c41" />
+  <Project Path="Marqdouj.DotNet.AzureMaps.Blazor/Marqdouj.DotNet.AzureMaps.Blazor.csproj" />
+  <Project Path="Sandbox.CustomMaps/Sandbox.CustomMaps.csproj" Id="23482bbd-a671-404a-88ff-aa31321e721b" />
+</Solution>
