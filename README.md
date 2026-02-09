@@ -5,9 +5,8 @@ Contains a script and Blazor component (`MapsContainer`) that manages JSInterop 
 The component allows for management of multiple maps within it's `ChildContent`.
 Formatting and styling is easily managed by the user within the ChildContent.
 
-This library supersedes the previous [library](https://www.nuget.org/packages/Marqdouj.DotNet.AzureMaps/).
-A new library was created due to the many breaking changes that would have been required to
-incorporate the updated features added to this library.
+## NOTE: 
+This library supersedes the [DotNet.AzureMaps](https://www.nuget.org/packages/Marqdouj.DotNet.AzureMaps/) NuGet package.
 
 ## UI Companion Library
 - [NuGet](https://www.nuget.org/packages/Marqdouj.DotNet.AzureMaps.Blazor.UI/) package.
