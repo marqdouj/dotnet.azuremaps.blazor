@@ -31,5 +31,8 @@ An example of one of the methods to do this is in the demo.
 - See the [Configuration](docs/Configuration.md) section in the docs.
 
 ## Release Notes
+### 10.0.1
+- Update NuGet packages.
+
 ### 10.0.0
 - Initial release.

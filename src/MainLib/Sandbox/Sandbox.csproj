@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Marqdouj.DotNet.Web.Components" Version="10.1.2" />
+    <PackageReference Include="Marqdouj.DotNet.Web.Components" Version="10.2.0" />
     <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.13.2" />
     <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.13.2" />
   </ItemGroup>
