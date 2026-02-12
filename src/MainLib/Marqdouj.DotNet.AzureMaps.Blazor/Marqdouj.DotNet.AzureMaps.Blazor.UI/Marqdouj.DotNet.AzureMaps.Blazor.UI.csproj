@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Marqdouj.DotNet.Web.Components.FluentUI" Version="10.2.0" />
+    <PackageReference Include="Marqdouj.DotNet.Web.Components.FluentUI" Version="10.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="10.0.3" />
     <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.13.2" />
     <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.13.2" />
