@@ -31,6 +31,14 @@ An example of one of the methods to do this is in the demo.
 - See the [Configuration](docs/Configuration.md) section in the docs.
 
 ## Release Notes
+### 10.1.0
+- `GeoJson`. GeoJson objects have been modified to conform with the [RFC](https://datatracker.ietf.org/doc/html/rfc7946).
+  Some codes changes may be required due to these changes.
+  - `BoundingBox`. 
+	- Moved from Common to GeoJson namespace.
+	- Added `Is2D`, `Is3D`, and `IsValid` properties to indicate state.
+	- `Southwest/Northeast`. Properties will now return null if IsValid == false.
+
 ### 10.0.1
 - Update NuGet packages.
 

@@ -1,4 +1,5 @@
 ﻿using Marqdouj.DotNet.AzureMaps.Blazor.Models.Common;
+using Marqdouj.DotNet.AzureMaps.Blazor.Models.GeoJson;
 
 namespace Marqdouj.DotNet.AzureMaps.Blazor.Models.Configuration
 {

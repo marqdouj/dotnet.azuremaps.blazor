@@ -32,7 +32,7 @@ namespace Marqdouj.DotNet.AzureMaps.Blazor.Models.Interop.Modules
         public async Task Add(IEnumerable<MapLayerDef> items, IEnumerable<MapEventDef>? events = null)
         {
             ValidateMapLayerDefs(items);
-            await JsRuntime.InvokeVoidAsync(GetJsInteropMethod(), mapId, items?.Cast<object>().ToList(), events?.Cast<object>().ToList());
+            await JsRuntime.InvokeVoidAsync(GetJsInteropMethod(), mapId, items.Cast<object>().ToList(), events?.Cast<object>().ToList());
         }
 
         public async Task AddGroup(LayerEventsGroup item)

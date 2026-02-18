@@ -1,6 +1,4 @@
-﻿using Marqdouj.DotNet.AzureMaps.Blazor.Models.Common;
-
-namespace Marqdouj.DotNet.AzureMaps.Blazor.Models.GeoJson
+﻿namespace Marqdouj.DotNet.AzureMaps.Blazor.Models.GeoJson
 {
     public class MultiLineString() : Geometry(GeometryType.MultiLineString)
     {
