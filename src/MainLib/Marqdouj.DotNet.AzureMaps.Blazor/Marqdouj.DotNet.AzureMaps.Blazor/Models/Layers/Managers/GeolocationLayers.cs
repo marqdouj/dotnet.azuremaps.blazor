@@ -1,7 +1,6 @@
 ﻿using Marqdouj.DotNet.AzureMaps.Blazor.Models.Events;
 using Marqdouj.DotNet.AzureMaps.Blazor.Models.GeoJson;
 using Marqdouj.DotNet.AzureMaps.Blazor.Models.Interop;
-using Marqdouj.DotNet.AzureMaps.Blazor.Models.Layers;
 
 namespace Marqdouj.DotNet.AzureMaps.Blazor.Models.Layers.Managers
 {

@@ -1,5 +1,4 @@
 ﻿using Marqdouj.DotNet.AzureMaps.Blazor.Models.Interop;
-using Marqdouj.DotNet.AzureMaps.Blazor.Models.Layers;
 using System.Collections.ObjectModel;
 
 namespace Marqdouj.DotNet.AzureMaps.Blazor.Models.Layers
