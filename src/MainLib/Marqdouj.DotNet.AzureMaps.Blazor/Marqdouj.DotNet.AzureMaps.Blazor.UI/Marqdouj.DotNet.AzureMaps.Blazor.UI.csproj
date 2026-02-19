@@ -8,7 +8,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageIcon>DMNuGet.png</PackageIcon>
     <PackageReadmeFile>README_UI.md</PackageReadmeFile>
-    <Version>10.1.0</Version>
+    <Version>10.1.1-Preview-1.0</Version>
     <Title>UI Companion library for Marqdouj.DotNet.AzureMaps.Blazor NuGet package.</Title>
     <PackageProjectUrl>https://github.com/marqdouj/dotnet.azuremaps.blazor</PackageProjectUrl>
     <PackageTags>Blazor JSInterop Map Azure</PackageTags>

@@ -20,7 +20,7 @@
             this.geometries = [.. geometries];
             if (this.geometries.Count == 0)
                 throw new ArgumentException("GeometryCollection must contain at least one Geometry.", nameof(geometries));
-            BBox = bbox;
+            Bbox = bbox;
         }
 
         /// <summary>

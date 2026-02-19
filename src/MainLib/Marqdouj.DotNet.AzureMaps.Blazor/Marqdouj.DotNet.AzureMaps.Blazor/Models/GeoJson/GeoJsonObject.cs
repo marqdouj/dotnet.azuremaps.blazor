@@ -11,16 +11,17 @@ namespace Marqdouj.DotNet.AzureMaps.Blazor.Models.GeoJson
         /// <summary>
         /// <see cref="GeoJsonType"/>
         /// </summary>
-        [JsonIgnore]
-        public virtual GeoJsonType Type { get; protected set; } = type;
-
+        [JsonPropertyOrder(-1)]
         [JsonInclude]
-        [JsonPropertyName("type")]
-        internal string? TypeJs { get => Type.EnumToJson(); set => Type = value.JsonToEnum<GeoJsonType>(); }
+        public virtual GeoJsonType Type { get; internal set; } = type;
+
+        //[JsonInclude]
+        //[JsonPropertyName("Type")]
+        //internal string? TypeJs { get => Type.ToString(); set => Type = value.JsonToEnum<GeoJsonType>(); }
 
         /// <summary>
         /// <see cref="BoundingBox"/>
         /// </summary>
-        public BoundingBox? BBox { get; set; }
+        public BoundingBox? Bbox { get; set; }
     }
 }

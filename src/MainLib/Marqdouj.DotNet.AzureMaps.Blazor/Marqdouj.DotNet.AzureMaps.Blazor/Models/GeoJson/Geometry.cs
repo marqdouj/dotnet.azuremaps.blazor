@@ -10,7 +10,8 @@ namespace Marqdouj.DotNet.AzureMaps.Blazor.Models.GeoJson
         /// <summary>
         /// <see cref="Geometry"/>
         /// </summary>
-        [JsonIgnore]
-        public new GeometryType Type { get => (GeometryType)base.Type; protected set => base.Type = (GeoJsonType)value; }
+        [JsonPropertyOrder(-1)]
+        [JsonInclude]
+        public new GeometryType Type { get => (GeometryType)base.Type; internal set => base.Type = (GeoJsonType)value; }
     }
 }

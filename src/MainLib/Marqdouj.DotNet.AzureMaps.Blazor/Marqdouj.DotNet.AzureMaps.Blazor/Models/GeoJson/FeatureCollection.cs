@@ -20,7 +20,7 @@
             this.features = [.. features];
             if (this.features.Count == 0)
                 throw new ArgumentException("FeatureCollection must contain at least one Feature.", nameof(features));
-            BBox = bbox;
+            Bbox = bbox;
         }
 
         /// <summary>

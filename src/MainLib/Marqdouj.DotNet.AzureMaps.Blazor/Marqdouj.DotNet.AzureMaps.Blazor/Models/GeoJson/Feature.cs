@@ -20,7 +20,7 @@
             Geometry = geometry;
             Properties = properties;
             Id = id;
-            BBox = bbox;
+            Bbox = bbox;
         }
 
         /// <summary>

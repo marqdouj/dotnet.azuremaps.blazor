@@ -31,15 +31,20 @@ namespace Sandbox.Components.Pages.AzureMaps
 
         public static async Task<List<MapFeatureDef>> GetDefaultSymbolLayerFeatures(this IMapDataService dataService)
         {
-            var results = new List<MapFeatureDef>();
             var data = await dataService.GetSymbolLayerData();
+            return GetDefaultSymbolLayerFeatures(data);
+        }
+
+        public static List<MapFeatureDef> GetDefaultSymbolLayerFeatures(this List<Position> data)
+        {
+            var results = new List<MapFeatureDef<Point>>();
             var counter = 0;
 
             foreach (var position in data)
             {
                 counter++;
 
-                var feature = new MapFeatureDef(new Point(position))
+                var feature = new MapFeatureDef<Point>(new Point(position))
                 {
                     Properties = new Properties
                     {
@@ -53,7 +58,7 @@ namespace Sandbox.Components.Pages.AzureMaps
                 results.Add(feature);
             }
 
-            return results;
+            return [.. results.Cast<MapFeatureDef>()];
         }
 
         public static MapLayerDef GetDefaultLayerDef(this MapLayerType layerType)
@@ -206,14 +211,7 @@ namespace Sandbox.Components.Pages.AzureMaps
             await mapsInterop.Layers.Add([layerDef], events);
 
             var data = await dataService.GetLineLayerData();
-            var feature = new MapFeatureDef(new LineString(data))
-            {
-                Properties = new Properties
-                {
-                    { "title", "my line" },
-                    { "demo", true },
-                }
-            };
+            var feature = data.GetLineLayerFeatureDef();
 
             await mapsInterop.Features.Add(feature, layerDef.DataSource.Id!);
 
@@ -221,6 +219,18 @@ namespace Sandbox.Components.Pages.AzureMaps
                 await mapsInterop.Configurations.ZoomTo(data[8], 11);
 
             return layerDef;
+        }
+
+        public static MapFeatureDef GetLineLayerFeatureDef(this List<Position> data)
+        {
+            return new MapFeatureDef(new LineString(data))
+            {
+                Properties = new Properties
+                {
+                    { "title", "my line" },
+                    { "demo", true },
+                }
+            };
         }
 
         private static async Task<MapLayerDef> AddPolygonLayer(IAzMapInterop mapsInterop, IMapDataService dataService, PolygonLayerDef layerDef, bool zoomTo, IEnumerable<MapEventDef>? events = null)

@@ -1,9 +1,12 @@
-﻿namespace Marqdouj.DotNet.AzureMaps.Blazor.Models.GeoJson
+﻿using System.Text.Json.Serialization;
+
+namespace Marqdouj.DotNet.AzureMaps.Blazor.Models.GeoJson
 {
     /// <summary>
     /// 'geometry type' as described in RFC.
     /// <see href="https://datatracker.ietf.org/doc/html/rfc7946#section-1.4"/>
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum GeometryType
     {
         /// <summary>
@@ -46,6 +49,7 @@
     /// 'GeoJSON types' as described in RFC.
     /// <see href="https://datatracker.ietf.org/doc/html/rfc7946#section-1.4"/>
     /// </summary>
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum GeoJsonType
     {
         /// <summary>
