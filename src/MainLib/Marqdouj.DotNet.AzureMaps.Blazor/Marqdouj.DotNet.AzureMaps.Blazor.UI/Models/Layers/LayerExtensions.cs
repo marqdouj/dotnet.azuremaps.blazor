@@ -13,7 +13,7 @@ namespace Marqdouj.DotNet.AzureMaps.Blazor.UI.Models.Layers
                     ((BubbleLayerDef)layerDef).Options = (BubbleLayerOptions)options;
                     break;
                 case MapLayerType.HeatMap:
-                    ((BubbleLayerDef)layerDef).Options = (BubbleLayerOptions)options;
+                    ((HeatMapLayerDef)layerDef).Options = (HeatMapLayerOptions)options;
                     break;
                 case MapLayerType.Image:
                     ((ImageLayerDef)layerDef).Options = (ImageLayerOptions)options;
