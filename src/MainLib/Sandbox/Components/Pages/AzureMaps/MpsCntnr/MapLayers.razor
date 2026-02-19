@@ -219,7 +219,7 @@
         try
         {
             if (mapInteropA is null) return;
-            if (!vm.IsLoaded) return;
+            if (!vm.IsLoaded || vm.ZoomTo == null) return;
 
             overlay = true;
             await mapInteropA.Configurations.ZoomTo(vm.ZoomTo!, vm.ZoomLevel);
@@ -254,6 +254,7 @@
             overlay = true;
             await mapInteropA.Layers.SetOptions(uiLayerDef);
             vm.LayerDef.SetOptions(options.GetSource());
+            await ZoomToLayer(vm);
         }
         catch (Exception ex)
         {

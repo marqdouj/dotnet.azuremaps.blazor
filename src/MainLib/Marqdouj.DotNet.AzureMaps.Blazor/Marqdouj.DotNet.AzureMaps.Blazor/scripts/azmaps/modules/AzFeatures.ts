@@ -46,19 +46,20 @@ export class AzFeatures {
 
         let geom: atlas.data.Geometry;
         const geomType = mapFeature.geometry.type as string;
+        const bbox: atlas.data.BoundingBox = mapFeature.bbox ? new atlas.data.BoundingBox(mapFeature.bbox) : undefined;
 
         switch (geomType.toLowerCase()) {
             case GeoJSONType.Point:
                 geom = new atlas.data.Point(mapFeature.geometry.coordinates);
                 break;
             case GeoJSONType.MultiPoint:
-                geom = new atlas.data.MultiPoint(mapFeature.geometry.coordinates, mapFeature.bbox);
+                geom = new atlas.data.MultiPoint(mapFeature.geometry.coordinates, bbox);
                 break;
             case GeoJSONType.LineString:
-                geom = new atlas.data.LineString(mapFeature.geometry.coordinates, mapFeature.bbox);
+                geom = new atlas.data.LineString(mapFeature.geometry.coordinates, bbox);
                 break;
             case GeoJSONType.Polygon:
-                geom = new atlas.data.Polygon(mapFeature.geometry.coordinates, mapFeature.bbox);
+                geom = new atlas.data.Polygon(mapFeature.geometry.coordinates, bbox);
                 break;
         }
 
@@ -190,7 +191,7 @@ export interface IMapFeatureDef {
     id: string;
     jsInterop: IJSInteropDef;
     geometry: any;
-    bbox?: atlas.data.BoundingBox;
+    bbox?: number[];
     properties?: TProperties;
     asShape: boolean;
 }

@@ -7,6 +7,10 @@ A UI companion library for [Marqdouj.DotNet.AzureMaps.Blazor](https://www.nuget.
 A demo of this, and other of my `DotNet` packages, can be found [here](https://github.com/marqdouj/dotnet.demo).
 
 ## Release Notes
+### 10.1.0
+- Update NuGet packages
+- `LayerExtensions`. Fix casting error in `SetOptions` when setting HeatMapLayer options.
+
 ### 10.0.1
 - Update NuGet packages.
 

@@ -32,10 +32,16 @@ An example of one of the methods to do this is in the demo.
 
 ## Release Notes
 ### 10.1.0
-- `GeoJson`.GeoJson objects have been modified to conform with the [RFC](https://datatracker.ietf.org/doc/html/rfc7946).
+- `GeoJson`. GeoJson objects have been modified to conform with the [RFC](https://datatracker.ietf.org/doc/html/rfc7946).
   Some codes changes may be required due to these changes.
-  - `GeoJsonObject`. Base class for all GeoJson objects.
-  - `Geometry`. Geometry now derives from GeoJsonObject.
+  - `GeoJsonType (New)`. 'Type' Enum for all GeoJson objects.
+  - `GeoJsonObject (New)`. Base class for all GeoJson objects.
+  - `GeometryCollection (new)`. See [RFC](https://datatracker.ietf.org/doc/html/rfc7946#section-3.1.8)
+  - `Feature (new)`. See [RFC](https://datatracker.ietf.org/doc/html/rfc7946#section-3.2)
+  - `FeatureCollection (new)`. See [RFC](https://datatracker.ietf.org/doc/html/rfc7946#section-3.3)
+  - `Geometry`. 
+	- Derives from `GeoJsonObject`.
+	- `GeometryType`. Overrides base `GeoJsonObject.Type` enum; is castable to/from `GeoJsonType`.
   - `BoundingBox`. 
 	- Moved from Common to GeoJson namespace.
 	- Added `Is2D`, `Is3D`, and `IsValid` properties to indicate state.
