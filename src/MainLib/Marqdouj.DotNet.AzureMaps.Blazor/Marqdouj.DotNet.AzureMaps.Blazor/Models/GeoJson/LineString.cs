@@ -6,8 +6,6 @@
 
         public LineString(List<Position> coordinates) : this() => Coordinates = coordinates;
 
-        public BoundingBox? Bbox { get; set; }
-
         public List<Position> Coordinates { get => coordinates; set => coordinates = value ?? []; }
     }
 }
