@@ -6,7 +6,7 @@
     /// P represents properties (dictionary mapping string to any) and can be null.
     /// <see href="https://datatracker.ietf.org/doc/html/rfc7946#section-3.2"/>
     /// </summary>
-    public sealed class Feature<G, P> : GeoJsonObject where G : Geometry
+    public class Feature<G, P> : GeoJsonObject where G : Geometry
     {
         /// <summary>
         /// 

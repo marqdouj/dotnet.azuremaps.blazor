@@ -31,16 +31,19 @@ An example of one of the methods to do this is in the demo.
 - See the [Configuration](docs/Configuration.md) section in the docs.
 
 ## Release Notes
-### 10.1.1
+### 10.2.0
 - `GeoJson`.
-  - `GeometryType/GeoJsonType`. Enums have been updated to use `JsonStringEnumConverter`.
+  - `GeometryType/GeoJsonType`. Enums are now serialized to/from Json using the `JsonStringEnumConverter`.
+  - `MapFeatureDef<T>`. Strongly typed `MapFeatureDef`. Required for deserialization.
   - `MapFeatureDef`. 
-	- Added extension methods to convert to/from Feature/FeatureCollection.
-	- `MapFeatureDef<T>`. Specify the type of Geometry.
-	  - `JsonSerializer`. Required for deserialization.
+	- Moved from `Layers` to `GeoJson` namespace.
 	- `Id`. Property is now independent of the JsInterop.Id property.
+  - `FeatureCollection`.
+	- Removed requirement for at least one feature in collection (not part of the specification).
+	- `Features`. Changed from IReadOnlyList to a full property. May be null.
   - `GeoJsonObject`
 	- `BBox`. Rename to Bbox to conform with json naming requirements.
+  - `GeoJsonSerialization`. Extension methods for serialzation.
 
 ### 10.1.0
 - `GeoJson`. GeoJson objects have been modified to conform with the [RFC](https://datatracker.ietf.org/doc/html/rfc7946).

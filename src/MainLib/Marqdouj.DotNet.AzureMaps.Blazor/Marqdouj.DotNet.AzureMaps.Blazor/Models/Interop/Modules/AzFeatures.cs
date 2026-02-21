@@ -1,6 +1,5 @@
 ﻿using Marqdouj.DotNet.AzureMaps.Blazor.Models.Common;
 using Marqdouj.DotNet.AzureMaps.Blazor.Models.GeoJson;
-using Marqdouj.DotNet.AzureMaps.Blazor.Models.Layers;
 using Microsoft.JSInterop;
 using System.Runtime.CompilerServices;
 

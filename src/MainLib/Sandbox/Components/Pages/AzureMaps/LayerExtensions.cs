@@ -221,9 +221,9 @@ namespace Sandbox.Components.Pages.AzureMaps
             return layerDef;
         }
 
-        public static MapFeatureDef GetLineLayerFeatureDef(this List<Position> data)
+        public static MapFeatureDef<LineString> GetLineLayerFeatureDef(this List<Position> data)
         {
-            return new MapFeatureDef(new LineString(data))
+            return new MapFeatureDef<LineString>(new LineString(data))
             {
                 Properties = new Properties
                 {

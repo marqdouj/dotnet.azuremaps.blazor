@@ -1,4 +1,4 @@
-﻿using Marqdouj.DotNet.AzureMaps.Blazor.Models.Layers;
+﻿using Marqdouj.DotNet.AzureMaps.Blazor.Models.GeoJson;
 
 namespace Marqdouj.DotNet.AzureMaps.Blazor.Models.Animations
 {
