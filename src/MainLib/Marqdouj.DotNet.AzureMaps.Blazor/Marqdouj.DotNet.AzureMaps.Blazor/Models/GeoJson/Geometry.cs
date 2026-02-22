@@ -8,7 +8,7 @@ namespace Marqdouj.DotNet.AzureMaps.Blazor.Models.GeoJson
     public abstract class Geometry(GeometryType type) : GeoJsonObject((GeoJsonType)type)
     {
         /// <summary>
-        /// <see cref="Geometry"/>
+        /// <see cref="GeometryType"/>
         /// </summary>
         [JsonPropertyOrder(-1)]
         [JsonInclude]
